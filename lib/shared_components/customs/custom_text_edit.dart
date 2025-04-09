@@ -416,9 +416,9 @@ class CustomTextFormField extends StatelessWidget {
       case TextFormFieldShape.RoundedBorder4:
         return BorderRadius.circular(4.0);
       case TextFormFieldShape.RoundedBorder12:
-        return BorderRadiusStyle.roundedBorder12;
+        return AppRadiusStyle.roundedBorder12;
       default:
-        return BorderRadiusStyle.roundedBorder6;
+        return AppRadiusStyle.roundedBorder6;
     }
   }
 

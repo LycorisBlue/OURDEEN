@@ -215,19 +215,19 @@ class CustomButton extends StatelessWidget {
   _setBorderRadius() {
     switch (shape) {
       case ButtonShape.RoundedBorder6:
-        return BorderRadiusStyle.roundedBorder8;
+        return AppRadiusStyle.roundedBorder8;
 
       case ButtonShape.RoundedBorder12:
-        return BorderRadiusStyle.roundedBorder12;
+        return AppRadiusStyle.roundedBorder12;
 
       case ButtonShape.RoundedBorder16:
-        return BorderRadiusStyle.roundedBorder16;
+        return AppRadiusStyle.roundedBorder16;
       case ButtonShape.RoundedBorder24:
-        return BorderRadiusStyle.circleBorder24;
+        return AppRadiusStyle.circleBorder24;
       case ButtonShape.Square:
         return BorderRadius.circular(0);
       default:
-        return BorderRadiusStyle.roundedBorder12;
+        return AppRadiusStyle.roundedBorder12;
     }
   }
 

@@ -13,7 +13,7 @@ void showCustomDialog({
     Dialog(
       child: Container(
         decoration:
-            BoxDecoration(borderRadius: BorderRadiusStyle.roundedBorder16),
+            BoxDecoration(borderRadius: AppRadiusStyle.roundedBorder16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

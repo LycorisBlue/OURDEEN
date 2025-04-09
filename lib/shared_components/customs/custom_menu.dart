@@ -22,7 +22,7 @@ class PopupMenu<T> extends StatelessWidget {
         color: AppColors.whiteColor.withOpacity(0.8),
         padding: const EdgeInsets.only(left: 8.0, right: 0.0),
         shape: OutlineInputBorder(
-          borderRadius: BorderRadiusStyle.roundedBorder12,
+          borderRadius: AppRadiusStyle.roundedBorder12,
           borderSide: BorderSide(color: AppColors.greyColor),
         ),
         position: PopupMenuPosition.under,

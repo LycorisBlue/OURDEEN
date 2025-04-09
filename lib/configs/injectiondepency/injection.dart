@@ -1,4 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import '/services/locals/local_storage_service.dart';
 import '/data/repositories/auth_repository.dart';
 import '/constants/app_export.dart';
@@ -7,7 +7,7 @@ import '/services/networks/apis/rest_api_service.dart';
 final sl = GetIt.instance;
 
 // firebase instance declaration message
-FirebaseMessaging firebasemessaging = FirebaseMessaging.instance;
+// FirebaseMessaging firebasemessaging = FirebaseMessaging.instance;
 
 Future<void> init() async {
   sl.registerLazySingleton<AuthRepository>(

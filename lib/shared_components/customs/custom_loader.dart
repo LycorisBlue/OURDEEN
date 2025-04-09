@@ -16,7 +16,7 @@ void showCustomLoading({
         width: 100,
         height: 100,
         decoration: BoxDecoration(
-            borderRadius: BorderRadiusStyle.circleBorder20,
+            borderRadius: AppRadiusStyle.circleBorder20,
             color: AppColors.whiteColor),
         child: loading(type, durationMillisecond),
       ),

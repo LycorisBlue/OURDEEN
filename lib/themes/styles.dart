@@ -20,12 +20,24 @@ class AppTextStyle {
 
 // APP decoration
 class AppDecoration {
-  static BoxDecoration get exampleBoxDecoration => const BoxDecoration();
+  static BoxDecoration get greyRaduisBoxDecoration =>  BoxDecoration(
+    borderRadius: AppRadiusStyle.roundedBorder16,
+    color: AppColors.lightGreyColor,
+    border: Border.all(color: AppColors.blackColor, width: 1),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.greyColor,
+        spreadRadius: 5,
+        blurRadius: 10,
+        offset: const Offset(0, 1), 
+      ),
+    ]
+  );
   // Ajoutez d'autres BoxDecoration si nécessaire
 }
 
 // Border Radius
-class BorderRadiusStyle {
+class AppRadiusStyle {
   static BorderRadius roundedBorder4 = BorderRadius.circular(4.r);
   static BorderRadius roundedBorder6 = BorderRadius.circular(6.r);
   static BorderRadius roundedBorder8 = BorderRadius.circular(8.r);

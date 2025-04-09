@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:templateproject/app/account/bindings/account_binding.dart';
+import 'package:templateproject/app/home/bindings/home_binding.dart';
 import '/app/account/screens/login_screen.dart';
 import '/app/home/screens/home_screen.dart';
 import '/configs/routes/page_name.dart';
@@ -13,8 +14,9 @@ class AppPages {
   static final routes = [
     GetPage(
       name: initial,
-      page: () => const MyHomePage(),
+      page: () =>  MyHomePage(),
       title: PageTitle.initial,
+      binding: HomeBinding(),
     ),
     GetPage(
       name: login,
