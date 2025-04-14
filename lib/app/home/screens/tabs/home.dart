@@ -1,4 +1,4 @@
-import 'package:templateproject/constants/assets_path.dart';
+import '/constants/assets_path.dart';
 
 import '/app/home/controllers/player_controller.dart';
 import '/constants/app_export.dart';
@@ -43,7 +43,6 @@ class HomeTab extends StatelessWidget {
         children: [
           Row(
             children: [
-              // Placeholder image for the avatar
               Container(
                 width: 50,
                 height: 50,
@@ -65,28 +64,32 @@ class HomeTab extends StatelessWidget {
               ),
             ],
           ),
-          // Message icon
-          Container(
-             width: 45,
-                height: 45,
-            padding: EdgeInsets.all(3),
-            decoration: BoxDecoration(
-                color: AppColors.lightGreyColor,
-                border: Border.all(color: AppColors.blackColor, width: 1),
-                borderRadius: AppRadiusStyle.roundedBorder12,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withValues(alpha: 0.4),
-                    spreadRadius: 2,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  ),
-                ]),
-            child: CustomImageView(
-              width: 30,
-              height: 30,
-              margin: EdgeInsets.only(top: 8),
-              svgPath: AppIcon.iconMessage,
+          GestureDetector(
+            onTap: () {
+              MyNavigation.goToQuibla();
+            },
+            child: Container(
+               width: 45,
+                  height: 45,
+              padding: EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                  color: AppColors.lightGreyColor,
+                  border: Border.all(color: AppColors.blackColor, width: 1),
+                  borderRadius: AppRadiusStyle.roundedBorder12,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withValues(alpha: 0.4),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
+                    ),
+                  ]),
+              child: CustomImageView(
+                width: 30,
+                height: 30,
+                margin: EdgeInsets.only(top: 8),
+                svgPath: AppIcon.iconMessage,
+              ),
             ),
           ),
         ],

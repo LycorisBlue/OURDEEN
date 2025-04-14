@@ -10,6 +10,9 @@ class MyNavigation {
     Get.offAllNamed(MyRoutes.login);
   }
 
+static void goToQuibla() {
+    Get.toNamed(MyRoutes.quibla);
+  }
   static void goTo404Page() {
     Get.offAllNamed(MyRoutes.unknownRoute);
   }

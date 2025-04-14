@@ -1,5 +1,4 @@
-import 'package:templateproject/constants/assets_path.dart';
-
+import '/constants/assets_path.dart';
 import '/app/home/controllers/player_controller.dart';
 import '/constants/app_export.dart';
 

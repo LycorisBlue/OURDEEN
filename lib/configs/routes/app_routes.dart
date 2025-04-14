@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
-import 'package:templateproject/app/account/bindings/account_binding.dart';
-import 'package:templateproject/app/home/bindings/home_binding.dart';
+import '/app/account/bindings/account_binding.dart';
+import '/app/home/bindings/home_binding.dart';
+import '/app/quibla/bindings/quibla_binding.dart';
+import '/app/quibla/screens/quibla_screen.dart';
 import '/app/account/screens/login_screen.dart';
 import '/app/home/screens/home_screen.dart';
 import '/configs/routes/page_name.dart';
@@ -8,6 +10,7 @@ import '/configs/routes/page_name.dart';
 class AppPages {
   static const initial = MyRoutes.initial;
   static const login = MyRoutes.login;
+  static const quibla = MyRoutes.quibla;
 
   static const unknownRoute = MyRoutes.unknownRoute;
 
@@ -24,5 +27,11 @@ class AppPages {
       title: PageTitle.loginPage,
       binding: AccountBinding(),
     ),
+    GetPage(
+      name: quibla,
+      page: () =>  QuiblaScreen(),
+      title: PageTitle.quiblaPage,
+      binding: QuiblaBinding(),
+      ),
   ];
 }

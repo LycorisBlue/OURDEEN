@@ -23,4 +23,6 @@ class AppImage {
   static const profil = "assets/images/profil.png";
   static const citation = "assets/images/citation.png";
   static const mosque = "assets/images/mosque.png";
+  static const kaaba = "assets/images/kaaba.png";
+  static const compass = "assets/images/compass.png";
 }

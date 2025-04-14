@@ -7,6 +7,7 @@ class AppColors {
   static const Color primaryLightColor = Color(0xff8CEFF3);
   static const Color primaryDarkColor = Color(0xff004D51);
   static const Color secondaryColor = Color(0xff04979E);
+  static const Color bgColor = Color(0xff96D8DB);
   //for custom colors
   static final Color whiteColor = fromHex("#ffffff"); // Blanc
   static final Color whiteYellowColor = fromHex("#FEF8EC"); // Blanc
