@@ -37,12 +37,23 @@ class CustomBottomNavigationBar extends StatelessWidget {
               ),
               label: 'Prière',
             ),
+             BottomNavigationBarItem(
+              icon: CustomImageView(
+                svgPath: AppIcon.iconTabQuibla,
+                width: 22,
+                height: 22,
+                color: navigationController.tabIndex.value == 2
+                    ? AppColors.whiteColor
+                    : AppColors.whiteColor.withValues(alpha: 0.5),
+              ),
+              label: 'Quibla',
+            ),
             BottomNavigationBarItem(
               icon: CustomImageView(
                 svgPath: AppIcon.iconTabCoran,
                 width: 22,
                 height: 22,
-                color: navigationController.tabIndex.value == 2
+                color: navigationController.tabIndex.value == 3
                     ? AppColors.whiteColor
                     : AppColors.whiteColor.withValues(alpha: 0.5),
               ),
@@ -53,7 +64,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 svgPath: AppIcon.iconTabReglage,
                 width: 22,
                 height: 22,
-                color: navigationController.tabIndex.value == 3
+                color: navigationController.tabIndex.value == 4
                     ? AppColors.whiteColor
                     : AppColors.whiteColor.withValues(alpha: 0.5),
               ),

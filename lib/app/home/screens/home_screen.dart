@@ -1,3 +1,5 @@
+import 'package:templateproject/app/quibla/screens/quibla_screen.dart';
+
 import '/app/home/screens/tabs/priere.dart';
 import '/app/home/screens/tabs/reglage.dart';
 import '/app/home/screens/tabs/coran.dart';
@@ -12,6 +14,7 @@ class MyHomePage extends StatelessWidget {
   final pages = [
     HomeTab(),
     PriereTab(),
+    QuiblaScreen(),
     CoranTab(),
     ReglageTab(),
   ];

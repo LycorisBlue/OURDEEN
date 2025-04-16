@@ -6,6 +6,13 @@ class HomeController extends GetxController {
   var fontSize = 16.0.obs;
   var isFavorite = false.obs;
 
+  // Contenus pour chaque mode
+  var arabicContent = "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ".obs;
+
+  var frenchContent = "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.".obs;
+
+  var transliterationContent = "Bismillahi r-rahmani r-rahim".obs;
+
   // Méthode pour changer l'onglet sélectionné
   void changeTab(String tab) {
     selectedTab.value = tab;
@@ -18,5 +25,19 @@ class HomeController extends GetxController {
 
   void changeFontSize(double size) {
     fontSize.value = size;
+  }
+
+  // Renvoie le contenu approprié selon l'onglet sélectionné
+  String getCurrentContent() {
+    switch (selectedTab.value) {
+      case 'Arabe':
+        return arabicContent.value;
+      case 'Traduction':
+        return frenchContent.value;
+      case 'Translittéra..':
+        return transliterationContent.value;
+      default:
+        return transliterationContent.value;
+    }
   }
 }

@@ -105,10 +105,7 @@ class CoranTab extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected ? Colors.white : AppColors.secondaryColor,
             borderRadius: AppRadiusStyle.roundedBorder8,
-            border: isSelected
-                ? null
-                : Border.all(
-                    color: Colors.white.withValues(alpha: 0.3), width: 1),
+            border: isSelected ? null : Border.all(color: Colors.white.withValues(alpha: 0.3), width: 1),
             boxShadow: isSelected
                 ? [
                     BoxShadow(
@@ -148,10 +145,10 @@ class CoranTab extends StatelessWidget {
                   margin: EdgeInsets.only(left: 6, right: 6, top: 8),
                   decoration: BoxDecoration(
                     color: AppColors.secondaryColor,
-                    borderRadius:  BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  topRight: Radius.circular(8),
-                ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8),
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withValues(alpha: 0.4),
@@ -205,25 +202,21 @@ class CoranTab extends StatelessWidget {
                     () => GestureDetector(
                       onTap: () => controller.toggleFavorite(),
                       child: Container(
-                        decoration: BoxDecoration(
-                            color: AppColors.whiteColor,
-                            borderRadius: AppRadiusStyle.circleBorder30,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withValues(alpha: 0.4),
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                                offset: Offset(0, 2),
-                              ),
-                            ]),
+                        decoration:
+                            BoxDecoration(color: AppColors.whiteColor, borderRadius: AppRadiusStyle.circleBorder30, boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withValues(alpha: 0.4),
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ]),
                         padding: const EdgeInsets.all(8),
                         child: CustomImageView(
                           svgPath: AppIcon.iconFavoris,
                           width: 20,
                           height: 20,
-                          color: controller.isFavorite.value
-                              ? Colors.amber
-                              : AppColors.primaryColor,
+                          color: controller.isFavorite.value ? Colors.amber : AppColors.primaryColor,
                         ),
                       ),
                     ),
@@ -308,7 +301,7 @@ class CoranTab extends StatelessWidget {
           ),
         ),
 
-        // Second bloc: Contenu du Coran
+        // Second bloc: Contenu du Coran avec sélection du tab
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
           decoration: BoxDecoration(
@@ -317,41 +310,74 @@ class CoranTab extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                // Texte arabe
-                Obx(
-                  () => Text(
-                    "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: controller.fontSize.value,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      height: 1.6,
-                    ),
-                  ),
-                ),
-                const Divider(
-                  height: 30,
-                  thickness: 1,
-                  color: Colors.black26,
-                ),
-                // Traduction
-                Obx(
-                  () => Text(
-                    "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: controller.fontSize.value - 4,
-                      color: Colors.black87,
-                      fontFamily: AppFont.poppins,
-                      height: 1.4,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: Obx(() {
+              switch (controller.selectedTab.value) {
+                case 'Arabe':
+                  return Column(
+                    children: [
+                      Text(
+                        controller.arabicContent.value,
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          fontSize: controller.fontSize.value,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          height: 1.8,
+                        ),
+                      ),
+                    ],
+                  );
+                case 'Traduction':
+                  return Column(
+                    children: [
+                      Text(
+                        controller.frenchContent.value,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: controller.fontSize.value - 2,
+                          color: Colors.black87,
+                          fontFamily: AppFont.poppins,
+                          height: 1.6,
+                        ),
+                      ),
+                    ],
+                  );
+                default: // Translittération
+                  return Column(
+                    children: [
+                      // Texte translittération
+                      Text(
+                        controller.transliterationContent.value,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: controller.fontSize.value - 2,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black,
+                          height: 1.6,
+                        ),
+                      ),
+                      const Divider(
+                        height: 30,
+                        thickness: 1,
+                        color: Colors.black26,
+                      ),
+                      // Traduction
+                      Text(
+                        controller.frenchContent.value,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: controller.fontSize.value - 4,
+                          color: Colors.black87,
+                          fontFamily: AppFont.poppins,
+                          height: 1.4,
+                        ),
+                      ),
+                    ],
+                  );
+              }
+            }),
           ),
         ),
       ],
