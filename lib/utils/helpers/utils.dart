@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import '/data/locals/data_local.dart';
 import '/configs/injectiondepency/injection.dart';
 import '/services/locals/local_storage_service.dart';
 
@@ -102,5 +104,14 @@ class Utils {
     return Langue.values.firstWhere(
       (e) => e.toString().split('.')[1] == value,
     );
+  }
+
+  static String decodeUnicodeToArabic(String input) {
+    return json.decode('"$input"');
+  }
+
+  static String getFrenchName(String englishTranslation) {
+  
+    return sourateTraductionsFr[englishTranslation] ?? englishTranslation;
   }
 }

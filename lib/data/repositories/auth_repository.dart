@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import '../../configs/injectiondepency/injection.dart';
+import '/configs/injectiondepency/injection.dart';
 import '/constants/api_path.dart';
 import '/data/models/user.dart';
 import '/services/networks/apis/api_base.dart';

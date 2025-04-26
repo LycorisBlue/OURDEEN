@@ -1,5 +1,5 @@
 import '/constants/assets_path.dart';
-import '/app/home/controllers/player_controller.dart';
+import '../../controllers/prayer_controller.dart';
 import '/constants/app_export.dart';
 
 class PriereTab extends StatelessWidget {
@@ -83,7 +83,7 @@ class PriereTab extends StatelessWidget {
   Widget _buildNextPrayerCard() {
     return Container(
       width: 1.sw,
-      height: 0.3.sh,
+      height: 0.35.sh,
       margin: EdgeInsets.symmetric(horizontal: 6, vertical: 20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -126,7 +126,7 @@ class PriereTab extends StatelessWidget {
                     fontFamily: AppFont.poppins,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 5),
                 Obx(() => Text(
                       controller.nextPrayer.value,
                       style: TextStyle(
@@ -146,14 +146,8 @@ class PriereTab extends StatelessWidget {
                         fontFamily: AppFont.poppins,
                       ),
                     )),
-                SizedBox(height: 10),
-                Obx(() => Container(
-                      // padding: EdgeInsets.all(4),
-                      // decoration: BoxDecoration(
-                      //   borderRadius: AppRadiusStyle.roundedBorder12,
-                      //   color: AppColors.blackColor.withValues(alpha: 0.1),
-                      // ),
-                      child: Text(
+                SizedBox(height: 5),
+                Obx(() =>  Text(
                         "DANS ${controller.minutesRemaining.value} MINUTES",
                         style: TextStyle(
                           color: AppColors.whiteColor,
@@ -162,7 +156,7 @@ class PriereTab extends StatelessWidget {
                           fontFamily: AppFont.poppins,
                         ),
                       ),
-                    )),
+                    ),
               ],
             ),
           ),

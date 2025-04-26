@@ -1,7 +1,8 @@
+import '../../widgets/community_card.dart';
+import '../../widgets/divine_names_card.dart';
 import '/constants/assets_path.dart';
-
-import '/app/home/controllers/player_controller.dart';
 import '/constants/app_export.dart';
+import '/app/home/controllers/prayer_controller.dart';
 
 class HomeTab extends StatelessWidget {
   HomeTab({super.key});
@@ -26,9 +27,11 @@ class HomeTab extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Prayer times grid
             _buildPrayerTimesGrid(),
+            _buildCategorySection(),
+            _buildDivineNamesSection(),
+            _buildCommunitySection(),
+            
           ],
         ),
       ),
@@ -69,8 +72,8 @@ class HomeTab extends StatelessWidget {
               MyNavigation.goToQuibla();
             },
             child: Container(
-               width: 45,
-                  height: 45,
+              width: 45,
+              height: 45,
               padding: EdgeInsets.all(3),
               decoration: BoxDecoration(
                   color: AppColors.lightGreyColor,
@@ -226,4 +229,117 @@ class HomeTab extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildCategorySection() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Vos rubriques",
+              style: TextStyle(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                // Action pour "Tout voir"
+              },
+              child: Text(
+                "Tout voir",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(height: 10),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          children: [
+            _buildCategoryItem("Qibla", AppColors.primaryColor, Icons.explore),
+            _buildCategoryItem("Duas", AppColors.secondaryColor, Icons.volunteer_activism),
+            _buildCategoryItem("Tasbih", AppColors.primaryDarkColor, Icons.grain),
+            _buildCategoryItem("Zakat", AppColors.primaryLightColor, Icons.calculate),
+            _buildCategoryItem("Ummah Pro", AppColors.purpleColor, Icons.forum),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _buildCategoryItem(String title, Color color, IconData icon) {
+  return SizedBox(
+    width: 80,
+    child: Column(
+      children: [
+        Container(
+          width: 65,
+          height: 65,
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.2),
+            shape: BoxShape.circle,
+            border: Border.all(color: color, width: 2),
+          ),
+          child: Icon(
+            icon,
+            color: color,
+            size: 30,
+          ),
+        ),
+        SizedBox(height: 8),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildDivineNamesSection() {
+  return DivineNamesCard(
+    arabicName: "الغفار",
+    latinName: "Al-Ghaffār",
+    frenchMeaning: "L'Infini Pardonneur",
+    onShowDetails: () {
+      // Action pour le bouton MONTRER
+    },
+    onShare: () {
+      // Action pour le bouton PARTAGER
+    },
+    onMore: () {
+      // Action pour le bouton More (trois points)
+    },
+  );
+}
+
+Widget _buildCommunitySection() {
+  return CommunityCard(
+    onJoinFacebook: () {
+      // Action pour le bouton "REJOINDRE SUR FACEBOOK"
+      // Vous pouvez ajouter ici un lien vers Facebook ou une autre action
+      // Par exemple: Get.to(() => WebViewScreen(url: 'https://www.facebook.com/group/...'));
+    },
+    onMoreOptions: () {
+      // Action pour le bouton More (trois points)
+    },
+  );
 }

@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:templateproject/constants/assets_path.dart';
+
 import '/constants/app_export.dart';
 import 'package:flutter/services.dart';
 
@@ -404,10 +406,11 @@ class CustomTextFormField extends StatelessWidget {
         );
       default:
         return TextStyle(
-            color: AppColors.greyColor,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 1);
+          color: AppColors.greyColor,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w500,
+          fontFamily: AppFont.poppins,
+        );
     }
   }
 

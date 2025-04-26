@@ -20,19 +20,18 @@ class AppTextStyle {
 
 // APP decoration
 class AppDecoration {
-  static BoxDecoration get greyRaduisBoxDecoration =>  BoxDecoration(
-    borderRadius: AppRadiusStyle.roundedBorder16,
-    color: AppColors.lightGreyColor,
-    border: Border.all(color: AppColors.blackColor, width: 1),
-    boxShadow: [
-      BoxShadow(
-        color: AppColors.greyColor,
-        spreadRadius: 5,
-        blurRadius: 10,
-        offset: const Offset(0, 1), 
-      ),
-    ]
-  );
+  static BoxDecoration get greyRaduisBoxDecoration => BoxDecoration(
+          borderRadius: AppRadiusStyle.roundedBorder16,
+          color: AppColors.lightGreyColor,
+          border: Border.all(color: AppColors.blackColor, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.greyColor,
+              spreadRadius: 5,
+              blurRadius: 10,
+              offset: const Offset(0, 1),
+            ),
+          ]);
   // Ajoutez d'autres BoxDecoration si nécessaire
 }
 
@@ -51,5 +50,7 @@ class AppRadiusStyle {
   static BorderRadius circleBorder50 = BorderRadius.circular(50.r);
   static BorderRadius circleBorder60 = BorderRadius.circular(60.r);
   static BorderRadius circleBorder74 = BorderRadius.circular(74.r);
+  static BorderRadius roundedBorder20Top = BorderRadius.only(
+      topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r));
   // Ajoutez d'autres BorderRadius si nécessaire
 }

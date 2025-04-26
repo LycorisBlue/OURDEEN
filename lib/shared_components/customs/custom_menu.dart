@@ -3,11 +3,10 @@ import '/constants/app_export.dart';
 
 class PopupMenu<T> extends StatelessWidget {
   const PopupMenu(
-      {Key? key,
+      {super.key,
       required this.items,
       this.icon = const Icon(Icons.more_vert),
-      this.iconColor = Colors.black})
-      : super(key: key);
+      this.iconColor = Colors.black});
 
   final List<Widget> items;
   final Widget? icon;
@@ -19,7 +18,7 @@ class PopupMenu<T> extends StatelessWidget {
       child: PopupMenuButton<T>(
         icon: icon,
         shadowColor: AppColors.greyColor,
-        color: AppColors.whiteColor.withOpacity(0.8),
+        color: AppColors.whiteColor.withValues(alpha: 0.8),
         padding: const EdgeInsets.only(left: 8.0, right: 0.0),
         shape: OutlineInputBorder(
           borderRadius: AppRadiusStyle.roundedBorder12,

@@ -1,4 +1,6 @@
 // ignore_for_file: constant_identifier_names
+import 'package:templateproject/constants/assets_path.dart';
+
 import '/constants/app_export.dart';
 
 // ignore: must_be_immutable
@@ -143,11 +145,11 @@ class CustomButton extends StatelessWidget {
       case ButtonVariant.White:
         return AppColors.whiteColor;
       case ButtonVariant.LightView:
-        return AppColors.primaryColor.withOpacity(0.6);
+        return AppColors.primaryColor.withValues(alpha: 0.6);
       case ButtonVariant.Desactived:
         return AppColors.lightGreyColor;
       case ButtonVariant.DesactivedGrey:
-        return AppColors.greyColor.withOpacity(0.6);
+        return AppColors.greyColor.withValues(alpha: 0.6);
       case ButtonVariant.TextUnique:
         return null;
       case ButtonVariant.Outline:
@@ -159,7 +161,7 @@ class CustomButton extends StatelessWidget {
       case ButtonVariant.Secondary:
         return AppColors.secondaryColor;
       default:
-        return AppColors.primaryColor;
+        return AppColors.secondaryColor;
     }
   }
 
@@ -237,14 +239,14 @@ class CustomButton extends StatelessWidget {
         return TextStyle(
           color: _setColorText(),
           fontSize: 13,
-          // fontFamily: AppFont.poppins,
+           fontFamily: AppFont.poppins,
           fontWeight: FontWeight.w600,
         );
       case ButtonFontStyle.Inter:
         return TextStyle(
           color: _setColorText(),
           fontSize: 12,
-          // fontFamily: AppFont.poppins,
+           fontFamily: AppFont.poppins,
           fontWeight: FontWeight.w600,
         );
       case ButtonFontStyle.TitilliumWeb:
@@ -258,9 +260,9 @@ class CustomButton extends StatelessWidget {
       default:
         return TextStyle(
           color: _setColorText(),
-          fontSize: 17,
-          // fontFamily: AppFont.poppins,
-          fontWeight: FontWeight.w500,
+          fontSize: 16.sp,
+         fontFamily: AppFont.inter,
+          fontWeight: FontWeight.w500
         );
     }
   }

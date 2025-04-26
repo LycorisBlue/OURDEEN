@@ -1,4 +1,5 @@
 // import 'package:firebase_messaging/firebase_messaging.dart';
+import '/data/repositories/coran_repository.dart';
 import '/services/locals/local_storage_service.dart';
 import '/data/repositories/auth_repository.dart';
 import '/constants/app_export.dart';
@@ -14,12 +15,17 @@ Future<void> init() async {
     () => AuthRepositoryImpl(),
   );
 
+   sl.registerLazySingleton<CoranRepository>(
+    () => CoranRepositoryImpl(),
+  );
+
+
   //... add other more repository here ....
 
   sl.registerLazySingleton(() => RestApiServices());
 
   // environnements set
-  sl.get<RestApiServices>().setEnvironment(EnvironmentType.local);
+  sl.get<RestApiServices>().setEnvironment(EnvironmentType.prod);
 
   // local storage (share preference) init
   sl.registerFactory<LocalStorageServices>(

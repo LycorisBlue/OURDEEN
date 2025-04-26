@@ -29,10 +29,10 @@ abstract class ApiBase<T> {
       Future<Response<dynamic>> apiCallback) async {
     try {
       final response = await apiCallback;
-      if (kDebugMode) {
-        print("=================================");
-        print(response);
-      }
+      // if (kDebugMode) {
+      //   print("=================================");
+      //   print(response);
+      // }
 
       return right(ApiResponse.success(response));
     } on DioException catch (e) {

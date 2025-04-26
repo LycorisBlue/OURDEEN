@@ -31,24 +31,24 @@ class ReglageTab extends StatelessWidget {
                     iconColor: AppColors.goldColor,
                     title: "Obtenez le premium",
                     icon: CustomImageView(
-                      imagePath: AppImage.iconStarFilled,
+                      svgPath: AppIcon.iconStarFilled,
                       width: 24,
                       height: 24,
                     ),
                   ),
-                  Divider(height: 1, thickness: 1, color: Colors.grey.withOpacity(0.2)),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.brightRedColor,
                     title: "Notifications",
                     icon: CustomImageView(
-                      imagePath: AppImage.iconBell,
+                      svgPath: AppIcon.iconBell,
                       width: 24,
                       height: 24,
                     ),
                   ),
                 ]),
 
-                SizedBox(height: 16),
+                SizedBox(height: 26),
 
                 // Bloc Genre (seul)
                 _buildSettingBlock([
@@ -56,14 +56,14 @@ class ReglageTab extends StatelessWidget {
                     iconColor: AppColors.purpleColor,
                     title: "Genre",
                     icon: CustomImageView(
-                      imagePath: AppImage.iconProfile,
+                      svgPath: AppIcon.iconProfile,
                       width: 24,
                       height: 24,
                     ),
                   ),
                 ]),
 
-                SizedBox(height: 16),
+                SizedBox(height: 26),
 
                 // Bloc Couleurs et Langues
                 _buildSettingBlock([
@@ -71,24 +71,24 @@ class ReglageTab extends StatelessWidget {
                     iconColor: AppColors.brightRedColor,
                     title: "Couleurs",
                     icon: CustomImageView(
-                      imagePath: AppImage.iconBrush,
+                      svgPath: AppIcon.iconBrush,
                       width: 24,
                       height: 24,
                     ),
                   ),
-                  Divider(height: 1, thickness: 1, color: Colors.grey.withOpacity(0.2)),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.skyBlueColor,
                     title: "Langues",
                     icon: CustomImageView(
-                      imagePath: AppImage.iconLanguage,
+                      svgPath: AppIcon.iconLanguage,
                       width: 24,
                       height: 24,
                     ),
                   ),
                 ]),
 
-                SizedBox(height: 16),
+                SizedBox(height: 26),
 
                 // Bloc Évaluez-nous et Suivez-nous
                 _buildSettingBlock([
@@ -96,17 +96,17 @@ class ReglageTab extends StatelessWidget {
                     iconColor: AppColors.brightRedColor,
                     title: "Évaluez-nous",
                     icon: CustomImageView(
-                      imagePath: AppImage.iconStar,
+                      svgPath: AppIcon.iconStar,
                       width: 24,
                       height: 24,
                     ),
                   ),
-                  Divider(height: 1, thickness: 1, color: Colors.grey.withOpacity(0.2)),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.skyBlueColor,
                     title: "Suivez-nous",
                     icon: CustomImageView(
-                      imagePath: AppImage.iconLink,
+                      svgPath: AppIcon.iconLink,
                       width: 24,
                       height: 24,
                     ),
@@ -127,7 +127,7 @@ class ReglageTab extends StatelessWidget {
         borderRadius: AppRadiusStyle.roundedBorder16,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 3,
             offset: Offset(0, 3),
@@ -168,10 +168,10 @@ class ReglageTab extends StatelessWidget {
               ),
             ),
           ),
-          Icon(
-            Icons.arrow_forward_ios,
-            size: 16,
-            color: AppColors.greyColor,
+          CustomImageView(
+            svgPath: AppIcon.iconArrowRight,
+            width: 24,
+            height: 24,
           ),
         ],
       ),
