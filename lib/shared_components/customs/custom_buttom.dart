@@ -1,5 +1,5 @@
 // ignore_for_file: constant_identifier_names
-import 'package:templateproject/constants/assets_path.dart';
+import '/constants/assets_path.dart';
 
 import '/constants/app_export.dart';
 

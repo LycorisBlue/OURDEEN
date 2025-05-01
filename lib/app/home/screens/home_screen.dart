@@ -1,5 +1,4 @@
-import 'package:templateproject/app/quibla/screens/quibla_screen.dart';
-
+import '/app/quibla/screens/quibla_screen.dart';
 import '/app/home/screens/tabs/priere.dart';
 import '/app/home/screens/tabs/reglage.dart';
 import '/app/home/screens/tabs/coran.dart';

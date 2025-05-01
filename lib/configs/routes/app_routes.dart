@@ -1,5 +1,16 @@
 import 'package:get/get.dart';
-import 'package:templateproject/app/home/screens/detail_coran.dart';
+import '/app/account/screens/couleur_screen.dart';
+import '/app/account/screens/genre_screen.dart';
+import '/app/account/screens/language_screen.dart';
+import '/app/account/screens/notification_screen.dart';
+import '/app/account/screens/premium_screen.dart';
+import '/app/home/screens/duas.dart';
+import '/app/home/screens/names_99.dart';
+import '/app/home/screens/tasbih.dart';
+import '/app/home/screens/zakkat.dart';
+import '/app/home/screens/prayers_list_screen.dart';
+import '/app/home/screens/detail_coran.dart';
+import '/app/home/screens/prayer_detail_screen.dart';
 import '/app/account/bindings/account_binding.dart';
 import '/app/home/bindings/home_binding.dart';
 import '/app/quibla/bindings/quibla_binding.dart';
@@ -13,6 +24,17 @@ class AppPages {
   static const login = MyRoutes.login;
   static const quibla = MyRoutes.quibla;
   static const coranDetail = MyRoutes.coranDetail;
+  static const priereDetail = MyRoutes.priereDetail;
+  static const prayerStep = MyRoutes.prayerStep;
+  static const duas = MyRoutes.duas;
+  static const zakkat = MyRoutes.zakkat;
+  static const name99 = MyRoutes.name99;
+  static const premium = MyRoutes.premium;
+  static const notification = MyRoutes.notification;
+  static const genre = MyRoutes.genre;
+  static const couleur = MyRoutes.couleur;
+  static const language = MyRoutes.language;
+  static const tasbih = MyRoutes.tasbih;
 
   static const unknownRoute = MyRoutes.unknownRoute;
 
@@ -40,6 +62,72 @@ class AppPages {
       page: () => DetailCoranScreen(),
       title: PageTitle.coranDetailPage,
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: priereDetail,
+      page: () => PrayerDetailScreen(),
+      title: PageTitle.priereDetailPage,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: prayerStep,
+      page: () => PrayersListScreen(),
+      title: PageTitle.prayerStepPage,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: duas,
+      page: () => DuasScreen(),
+      title: PageTitle.duasPage,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: zakkat,
+      page: () => ZakkatScreen(),
+      title: PageTitle.zakkatPage,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: tasbih,
+      page: () => TasbihScreen(),
+      title: PageTitle.tasbihPage,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: name99,
+      page: () => Name99Screen(),
+      title: PageTitle.name99Page,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: premium,
+      page: () => PremiumScreen(),
+      title: PageTitle.premiumPage,
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: notification,
+      page: () => NotificationScreen(),
+      title: PageTitle.notificationPage,
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: genre,
+      page: () => GenreScreen(),
+      title: PageTitle.genrePage,
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: couleur,
+      page: () => CouleurScreen(),
+      title: PageTitle.couleurPage,
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: language,
+      page: () => LanguageScreen(),
+      title: PageTitle.languagePage,
+      binding: AccountBinding(),
     ),
   ];
 }

@@ -130,8 +130,18 @@ class CoranTab extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only( right:8.0),
+                child: CircleAvatar(
+                  backgroundColor: AppColors.lightGreyColor.withValues(alpha: 0.5),
+                  child: Text("${item.number}",
+                      style:
+                          TextStyle(fontSize: 18.sp, color: AppColors.greyColor)),
+                ),
+              ),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -164,26 +174,24 @@ class CoranTab extends StatelessWidget {
                   ),
                 ],
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 60,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: AppColors.secondaryColor,
-                      borderRadius: AppRadiusStyle.roundedBorder8),
-                  child: Center(
-                    child: Text(
-                      "Lire",
-                      style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: 16.sp,
-                          fontFamily: AppFont.inter,
-                          fontWeight: FontWeight.w500),
-                    ),
+              Spacer(),
+              Container(
+                width: 60,
+                height: 30,
+                decoration: BoxDecoration(
+                    color: AppColors.secondaryColor,
+                    borderRadius: AppRadiusStyle.roundedBorder8),
+                child: Center(
+                  child: Text(
+                    "Lire",
+                    style: TextStyle(
+                        color: AppColors.whiteColor,
+                        fontSize: 16.sp,
+                        fontFamily: AppFont.inter,
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

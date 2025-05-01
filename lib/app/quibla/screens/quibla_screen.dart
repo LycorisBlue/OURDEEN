@@ -1,7 +1,6 @@
 import 'dart:math';
 
-import 'package:templateproject/constants/assets_path.dart';
-
+import '/constants/assets_path.dart';
 import '/app/quibla/controllers/quibla_crontroller.dart';
 import '/constants/app_export.dart';
 
@@ -14,6 +13,11 @@ class QuiblaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyAppScaffold(
       backgroundColor: AppColors.bgColor,
+       appBar: AppBar(
+        backgroundColor: AppColors.bgColor,
+        leadingWidth: 1.sw,
+        leading: _buildHeader(),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -21,15 +25,7 @@ class QuiblaScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildHeader(),
-                Text(
-                  "Quibla",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                
                 Obx(() {
                   if (controller.isLoading.value) {
                     return const Center(
@@ -151,27 +147,35 @@ class QuiblaScreen extends StatelessWidget {
 
   Widget _buildHeader() {
     return Padding(
-      padding: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.symmetric(horizontal: 26),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () => Get.back(),
-            child: Container(
-              width: 40,
-              height: 40,
-              padding: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: CustomImageView(
-                svgPath: AppIcon.iconArrowLeft,
-                width: 22,
-                height: 22,
-                color: AppColors.secondaryColor,
-              ),
-            ),
-          ),
+          Text(
+                  "Quibla",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 26.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+          // GestureDetector(
+          //   onTap: () => Get.back(),
+          //   child: Container(
+          //     width: 40,
+          //     height: 40,
+          //     padding: EdgeInsets.all(6),
+          //     decoration: BoxDecoration(
+          //       shape: BoxShape.circle,
+          //     ),
+          //     child: CustomImageView(
+          //       svgPath: AppIcon.iconArrowLeft,
+          //       width: 22,
+          //       height: 22,
+          //       color: AppColors.secondaryColor,
+          //     ),
+          //   ),
+          // ),
           Container(
             width: 40,
             height: 40,

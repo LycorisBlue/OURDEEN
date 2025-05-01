@@ -1,3 +1,7 @@
+import 'package:hijri/hijri_calendar.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '/shared_components/layout/bottom_navigation/bn_contolleur.dart';
 import '../../widgets/community_card.dart';
 import '../../widgets/divine_names_card.dart';
 import '/constants/assets_path.dart';
@@ -18,20 +22,36 @@ class HomeTab extends StatelessWidget {
             _buildNextPrayerCountdown(),
             _buildDuaCard(),
             Padding(
-              padding: EdgeInsets.only(left: 22, top: 20, bottom: 15),
-              child: Text(
-                "Aujourd'hui Abidjan",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            _buildPrayerTimesGrid(),
+                padding: EdgeInsets.only(left: 22, top: 20, bottom: 15),
+                child: Obx(
+                  () => controller.isLoading.value
+                      ? Shimmer.fromColors(
+                          baseColor: AppColors.greyColor,
+                          highlightColor: AppColors.primaryColor,
+                          child: SizedBox(
+                            width: 50,
+                            height: 20,
+                          ))
+                      : Text(
+                          "Aujourd'hui ${controller.currentLocation.value}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                )),
+            Obx(() => controller.isLoading.value
+                ? Shimmer.fromColors(
+                    baseColor: AppColors.greyColor,
+                    highlightColor: AppColors.primaryColor,
+                    child: SizedBox(
+                      width: 50,
+                      height: 20,
+                    ))
+                : _buildPrayerTimesGrid()),
             _buildCategorySection(),
             _buildDivineNamesSection(),
             _buildCommunitySection(),
-            
           ],
         ),
       ),
@@ -106,22 +126,38 @@ class HomeTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Obx(() => Text(
-                "Prochaine prière dans 0${controller.minutesRemaining}:28 min",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  color: AppColors.blackColor,
-                  fontWeight: FontWeight.w600,
-                ),
-              )),
+          Obx(() => controller.isLoading.value
+              ? Shimmer.fromColors(
+                  baseColor: AppColors.greyColor,
+                  highlightColor: AppColors.primaryColor,
+                  child: SizedBox(
+                    width: 50,
+                    height: 20,
+                  ))
+              : Text(
+                  "Prochaine prière ${controller.remainingTime}",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: AppColors.blackColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                )),
           SizedBox(height: 5),
-          Obx(() => Text(
-                "${controller.nextPrayer} ${controller.nextPrayerTime}",
-                style: TextStyle(
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
+          Obx(() => controller.isLoading.value
+              ? Shimmer.fromColors(
+                  baseColor: AppColors.greyColor,
+                  highlightColor: AppColors.primaryColor,
+                  child: SizedBox(
+                    width: 50,
+                    height: 20,
+                  ))
+              : Text(
+                  "${controller.nextPrayer} ${controller.nextPrayerTime}",
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
           SizedBox(height: 5),
           Obx(() => Text(
                 controller.hijriDate.value,
@@ -172,6 +208,14 @@ class HomeTab extends StatelessWidget {
   }
 
   Widget _buildPrayerTimesGrid() {
+    final times = controller.prayerTimes.value!;
+    String currentPrayer = controller.getCurrentPrayer({
+      'fajr': times.fajr,
+      'dhuhr': times.dhuhr,
+      'asr': times.asr,
+      'maghrib': times.maghrib,
+      'isha': times.isha,
+    });
     return GridView.count(
       padding: EdgeInsets.symmetric(horizontal: 20),
       crossAxisCount: 3,
@@ -181,12 +225,16 @@ class HomeTab extends StatelessWidget {
       crossAxisSpacing: 15,
       childAspectRatio: 1.0,
       children: [
-        _buildPrayerTimeCard("Fajr", "04:00", false),
-        _buildPrayerTimeCard("Shoroq", "05:55", true),
-        _buildPrayerTimeCard("Dhuhr", "13:55", false),
-        _buildPrayerTimeCard("Asr", "16:30", false),
-        _buildPrayerTimeCard("Maghrib", "22:01", false),
-        _buildPrayerTimeCard("Isha", "20:30", false),
+        _buildPrayerTimeCard("Fajr", times.fajr, currentPrayer == "Fajr"),
+        _buildPrayerTimeCard(
+            "Shoroq",
+            Utils.addTimeToString(times.fajr, hoursToAdd: 1, minutesToAdd: 35),
+            currentPrayer == "Shoroq"),
+        _buildPrayerTimeCard("Dhuhr", times.dhuhr, currentPrayer == "Dhuhr"),
+        _buildPrayerTimeCard("Asr", times.asr, currentPrayer == "Asr"),
+        _buildPrayerTimeCard(
+            "Maghrib", times.maghrib, currentPrayer == "Maghrib"),
+        _buildPrayerTimeCard("Isha", times.isha, currentPrayer == "Isha"),
       ],
     );
   }
@@ -269,11 +317,32 @@ Widget _buildCategorySection() {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           children: [
-            _buildCategoryItem("Qibla", AppColors.primaryColor, Icons.explore),
-            _buildCategoryItem("Duas", AppColors.secondaryColor, Icons.volunteer_activism),
-            _buildCategoryItem("Tasbih", AppColors.primaryDarkColor, Icons.grain),
-            _buildCategoryItem("Zakat", AppColors.primaryLightColor, Icons.calculate),
-            _buildCategoryItem("Ummah Pro", AppColors.purpleColor, Icons.forum),
+            _buildCategoryItem(
+              "Qibla",
+              AppColors.primaryColor,
+              Icons.explore,
+              onTap: () {
+                Get.find<BNavigationController>().changeTabIndex(2);
+              },
+            ),
+            _buildCategoryItem(
+                "Prières", AppColors.primaryDarkColor, Icons.timer,
+                customIcon: CustomImageView(
+                  svgPath: AppIcon.iconPriere,
+                  color: AppColors.primaryDarkColor,
+                  margin: EdgeInsets.all(12),
+                ), onTap: () {
+              MyNavigation.goToListStepSalat();
+            }),
+            _buildCategoryItem(
+                "Duas", AppColors.secondaryColor, Icons.volunteer_activism,
+                onTap: () => MyNavigation.goToDuas()),
+            _buildCategoryItem(
+                "Tasbih", AppColors.primaryDarkColor, Icons.grain,
+                onTap: () => MyNavigation.goToTasbih()),
+            _buildCategoryItem(
+                "Zakat", AppColors.primaryLightColor, Icons.calculate,
+                onTap: () => MyNavigation.goToZakkat()),
           ],
         ),
       ),
@@ -281,35 +350,40 @@ Widget _buildCategorySection() {
   );
 }
 
-Widget _buildCategoryItem(String title, Color color, IconData icon) {
-  return SizedBox(
-    width: 80,
-    child: Column(
-      children: [
-        Container(
-          width: 65,
-          height: 65,
-          decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.2),
-            shape: BoxShape.circle,
-            border: Border.all(color: color, width: 2),
+Widget _buildCategoryItem(String title, Color color, IconData icon,
+    {VoidCallback? onTap, Widget? customIcon}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: SizedBox(
+      width: 80,
+      child: Column(
+        children: [
+          Container(
+            width: 65,
+            height: 65,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.2),
+              shape: BoxShape.circle,
+              border: Border.all(color: color, width: 2),
+            ),
+            child: customIcon ??
+                Icon(
+                  icon,
+                  color: color,
+                  size: 30,
+                ),
           ),
-          child: Icon(
-            icon,
-            color: color,
-            size: 30,
+          SizedBox(height: 8),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
@@ -319,9 +393,10 @@ Widget _buildDivineNamesSection() {
     arabicName: "الغفار",
     latinName: "Al-Ghaffār",
     frenchMeaning: "L'Infini Pardonneur",
-    onShowDetails: () {
-      // Action pour le bouton MONTRER
+    onTap: () {
+      MyNavigation.goToName99();
     },
+    onShowDetails: () {},
     onShare: () {
       // Action pour le bouton PARTAGER
     },

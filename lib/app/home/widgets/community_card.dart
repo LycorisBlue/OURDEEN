@@ -29,12 +29,10 @@ class CommunityCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header with logo and title
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Row(
               children: [
-                // Yellow circle with hands and Arabic text
                 Container(
                   width: 50,
                   height: 50,
@@ -70,7 +68,6 @@ class CommunityCard extends StatelessWidget {
               ],
             ),
           ),
-
           Container(
             margin: EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
@@ -120,14 +117,10 @@ class CommunityCard extends StatelessWidget {
                       ),
                       SizedBox(height: 16),
                       // Stars decoration
-                      Positioned(
-                        left: 20,
-                        top: 30,
-                        child: Icon(
-                          Icons.star,
-                          color: Color(0xFFF9D665),
-                          size: 20,
-                        ),
+                      Icon(
+                        Icons.star,
+                        color: Color(0xFFF9D665),
+                        size: 20,
                       ),
                     ],
                   ),
@@ -147,7 +140,6 @@ class CommunityCard extends StatelessWidget {
               ],
             ),
           ),
-
           Padding(
             padding: EdgeInsets.all(16),
             child: Text(
@@ -159,12 +151,10 @@ class CommunityCard extends StatelessWidget {
               ),
             ),
           ),
-
           Divider(
               thickness: 1,
               height: 1,
               color: Colors.grey.withValues(alpha: 0.2)),
-
           InkWell(
             onTap: onJoinFacebook,
             child: Container(

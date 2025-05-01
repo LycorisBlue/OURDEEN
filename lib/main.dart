@@ -24,11 +24,11 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
-            title: "App Template",
+            title: "Ourdeen",
             debugShowCheckedModeBanner: false,
             //----------theme configuration------------
             theme: AppTheme.myLightTheme,
-            darkTheme: AppTheme.myDarkTheme,
+            // darkTheme: AppTheme.myDarkTheme,
             //-----------------------------------------
             //--------Language configuration-----------
             supportedLocales: const [

@@ -8,9 +8,9 @@ import '/shared_components/layout/bottom_navigation/bn_contolleur.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut(() => PrayerTimeController());
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => BNavigationController());
-    Get.lazyPut(() => PrayerTimeController());
     Get.lazyPut(() => QuiblaController());
     Get.lazyPut(() => CoranController());
   }

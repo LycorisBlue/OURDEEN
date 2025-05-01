@@ -17,6 +17,7 @@ class AppIcon {
   static const iconTime = 'assets/icons/time.svg';
   static const iconDuas = 'assets/icons/duas.svg';
   static const iconSearch = 'assets/icons/search.svg';
+  static const iconPriere = 'assets/icons/priere.svg';
 
   // tab icons
   static const iconTabCoran = 'assets/icons/tab-book.svg';
@@ -36,11 +37,19 @@ class AppIcon {
 }
 
 class AppImage {
-    static const logo = "assets/logo/logo.png";
+  static const logo = "assets/logo/logo.png";
   static const profil = "assets/images/profil.png";
   static const citation = "assets/images/citation.png";
   static const mosque = "assets/images/mosque.png";
   static const kaaba = "assets/images/kaaba.png";
   static const compass = "assets/images/compass.png";
 
+  // images pour les prières
+  static const prayerPreparation = "assets/images/prayer/preparation.png";
+  static const prayerAblution = "assets/images/prayer/ablution.png";
+  static const prayerFajr = "assets/images/prayer/fajr.png";
+  static const prayerDhuhr = "assets/images/prayer/dhuhr.png";
+  static const prayerAsr = "assets/images/prayer/asr.png";
+  static const prayerMaghreb = "assets/images/prayer/maghreb.png";
+  static const prayerIsha = "assets/images/prayer/isha.png";
 }

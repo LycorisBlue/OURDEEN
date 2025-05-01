@@ -13,80 +13,94 @@ class DetailCoranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.setupAudioProgressListener();
+      // controller.setScrollController(scrollController);
+    });
     controller.initWithSourate(sourate);
     return MyAppScaffold(
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child: _buildHeader(),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                Utils.getFrenchName(sourate.englishNameTranslation),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26.sp,
-                  fontWeight: FontWeight.bold,
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: buildHeader(),
                 ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 6),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildTabButton('Arabe'),
-                    const SizedBox(width: 4),
-                    _buildTabButton('Traduction'),
-                    const SizedBox(width: 4),
-                    _buildTabButton('Translittération'),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Expanded(
-              child: NotificationListener<ScrollNotification>(
-                onNotification: (scrollNotification) {
-                  return false;
-                },
-                child: SingleChildScrollView(
-                  controller: scrollController,
-                  physics:
-                      const BouncingScrollPhysics(), // Effet de rebond pour un défilement plus fluide
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: _buildCoranContent(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: Text(
+                    Utils.getFrenchName(sourate.englishNameTranslation),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 26.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(height: 16),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 6),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        buildTabButton('Arabe'),
+                        const SizedBox(width: 4),
+                        buildTabButton('Traduction'),
+                        const SizedBox(width: 4),
+                        buildTabButton('Translittération'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Expanded(
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (scrollNotification) {
+                      return false;
+                    },
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      physics:
+                          const BouncingScrollPhysics(), // Effet de rebond pour un défilement plus fluide
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24),
+                        child: buildCoranContent(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            buildFloatingPlayerBar(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        mini: true,
-        backgroundColor: AppColors.secondaryColor,
-        onPressed: () {
-          scrollController.animateTo(
-            0,
-            duration: Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          );
-        },
-        child: Icon(Icons.keyboard_arrow_up, color: Colors.white),
-      ),
+      // floatingActionButton: Obx(
+      //   () => controller.isPlaying.value &&
+      //           controller.showFloatingPlayerBar.value
+      //       ? SizedBox.shrink()
+      //       : FloatingActionButton(
+      //           mini: true,
+      //           backgroundColor: AppColors.secondaryColor,
+      //           onPressed: () {
+      //             scrollController.animateTo(
+      //               0,
+      //               duration: Duration(milliseconds: 500),
+      //               curve: Curves.easeInOut,
+      //             );
+      //           },
+      //           child: Icon(Icons.keyboard_arrow_up, color: Colors.white),
+      //         ),
+      // ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget buildHeader() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -127,7 +141,7 @@ class DetailCoranScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTabButton(String text) {
+  Widget buildTabButton(String text) {
     return Obx(() {
       bool isSelected = controller.selectedTab.value == text;
 
@@ -170,7 +184,7 @@ class DetailCoranScreen extends StatelessWidget {
     });
   }
 
-  Widget _buildCoranContent() {
+  Widget buildCoranContent() {
     return Column(
       children: [
         SizedBox(height: 16),
@@ -631,5 +645,99 @@ class DetailCoranScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget buildFloatingPlayerBar() {
+    return Obx(() {
+      if (!controller.isPlaying.value &&
+          !controller.showFloatingPlayerBar.value) {
+        return const SizedBox.shrink();
+      }
+
+      String ayatNumber = '';
+      if (controller.currentPlayingAyatIndex.value >= 0) {
+        ayatNumber =
+            "${sourate.number}:${controller.currentPlayingAyatIndex.value + 1}";
+      }
+
+      return Positioned(
+        bottom: 0,
+        left: 20,
+        right: 20,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: AppColors.secondaryColor,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 8,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.whiteYellowColor,
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  ayatNumber,
+                  style: TextStyle(
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.sp,
+                  ),
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  "Lecture en cours...",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: Icon(
+                  controller.isPlaying.value ? Icons.pause : Icons.play_arrow,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                onPressed: () {
+                  if (controller.currentPlayingAyatIndex.value >= 0) {
+                    if (controller.isPlaying.value) {
+                      controller.audioPlayer.pause();
+                      controller.isPlaying.value = false;
+                    } else {
+                      controller.audioPlayer.resume();
+                      controller.isPlaying.value = true;
+                    }
+                  }
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.stop,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                onPressed: () {
+                  controller.stopAudio();
+                  controller.showFloatingPlayerBar.value = false;
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 }

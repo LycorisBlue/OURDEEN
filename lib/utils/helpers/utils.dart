@@ -114,4 +114,12 @@ class Utils {
   
     return sourateTraductionsFr[englishTranslation] ?? englishTranslation;
   }
+
+  static String addTimeToString(String timeStr, {int hoursToAdd = 0, int minutesToAdd = 0}) {
+  DateTime time = DateTime.parse("2000-01-01T$timeStr:00");
+  DateTime newTime = time.add(Duration(hours: hoursToAdd, minutes: minutesToAdd));
+  String formatted = "${newTime.hour.toString().padLeft(2, '0')}:${newTime.minute.toString().padLeft(2, '0')}";
+  
+  return formatted;
+}
 }

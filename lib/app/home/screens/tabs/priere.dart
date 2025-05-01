@@ -8,56 +8,76 @@ class PriereTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyAppScaffold(
+      appBar: AppBar(
+        leadingWidth: 1.sw,
+        leading: _buildHeader(),
+      ),
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(),
-                Text(
-                  "Temps de prière",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                _buildNextPrayerCard(),
-                _buildCurrentTime(),
-                _buildPrayerTimesList(),
-              ],
+        child: Obx(() {
+          controller.currentTime.value;
+          if (controller.isLoading.value) {
+            return Center(
+                child: CircularProgressIndicator(color: Colors.white));
+          }
+
+          if (controller.prayerTimes.value == null) {
+            return Center(
+              child: Text(
+                'Aucune donnée disponible',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            );
+          }
+          return SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  
+                  _buildNextPrayerCard(),
+                  _buildCurrentTime(),
+                  _buildPrayerTimesList(),
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }
 
   Widget _buildHeader() {
     return Padding(
-      padding: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.symmetric(horizontal: 26),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Bouton retour
-          Container(
-            width: 40,
-            height: 40,
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor,
-              shape: BoxShape.circle,
-            ),
-            child: CustomImageView(
-              svgPath: AppIcon.iconArrowLeft,
-              width: 22,
-              height: 22,
-              color: AppColors.whiteYellowColor,
+          Text(
+            "Temps de prière",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 26.sp,
+              fontWeight: FontWeight.bold,
             ),
           ),
+          // Bouton retour
+          // Container(
+          //   width: 40,
+          //   height: 40,
+          //   padding: EdgeInsets.all(4),
+          //   decoration: BoxDecoration(
+          //     color: AppColors.primaryColor,
+          //     shape: BoxShape.circle,
+          //   ),
+          //   child: CustomImageView(
+          //     svgPath: AppIcon.iconArrowLeft,
+          //     width: 22,
+          //     height: 22,
+          //     color: AppColors.whiteYellowColor,
+          //   ),
+          // ),
 
           // Icône notification
           Container(
@@ -137,26 +157,25 @@ class PriereTab extends StatelessWidget {
                       ),
                     )),
                 SizedBox(height: 5),
-                Obx(() => Text(
-                      controller.nextPrayerTime.value,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 70.sp,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: AppFont.poppins,
-                      ),
-                    )),
+                Text(
+                  controller.nextPrayerTime.value,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 70.sp,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: AppFont.poppins,
+                  ),
+                ),
                 SizedBox(height: 5),
-                Obx(() =>  Text(
-                        "DANS ${controller.minutesRemaining.value} MINUTES",
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: AppFont.poppins,
-                        ),
-                      ),
-                    ),
+                Text(
+                  controller.remainingTime.value,
+                  style: TextStyle(
+                    color: AppColors.whiteColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: AppFont.poppins,
+                  ),
+                ),
               ],
             ),
           ),
@@ -167,11 +186,12 @@ class PriereTab extends StatelessWidget {
   }
 
   Widget _buildCurrentTime() {
+    DateTime now = DateTime.now();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
       child: Center(
         child: Text(
-          "Il est actuellement 14h52",
+          "Il est actuellement ${now.hour.toString().padLeft(2, '0')}h${now.minute.toString().padLeft(2, '0')}",
           style: TextStyle(
             color: Colors.white,
             fontSize: 16,
@@ -182,6 +202,14 @@ class PriereTab extends StatelessWidget {
   }
 
   Widget _buildPrayerTimesList() {
+    final times = controller.prayerTimes.value!;
+    final nextPrayer = controller.getNextPrayer({
+      'fajr': times.fajr,
+      'dhuhr': times.dhuhr,
+      'asr': times.asr,
+      'maghrib': times.maghrib,
+      'isha': times.isha,
+    });
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
       padding: EdgeInsets.all(20),
@@ -201,36 +229,63 @@ class PriereTab extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15),
-          _buildPrayerTimeRow("Fajr", "4:45"),
+          _buildPrayerTimeRow("Fajr", times.fajr,
+              isNext: nextPrayer['name'] == "Fajr",
+              timeRemaining: nextPrayer['duration']),
           Divider(height: 22, color: Colors.black12),
-          _buildPrayerTimeRow("Dhuhr", "12:12"),
+          _buildPrayerTimeRow("Dhuhr", times.dhuhr,
+              isNext: nextPrayer['name'] == "Dhuhr",
+              timeRemaining: nextPrayer['duration']),
           Divider(height: 22, color: Colors.black12),
-          _buildPrayerTimeRow("Asr", "16:32"),
+          _buildPrayerTimeRow("Asr", times.asr,
+              isNext: nextPrayer['name'] == "Asr",
+              timeRemaining: nextPrayer['duration']),
           Divider(height: 22, color: Colors.black12),
-          _buildPrayerTimeRow("Maghreb", "17:43"),
+          _buildPrayerTimeRow("Maghreb", times.maghrib,
+              isNext: nextPrayer['name'] == "Maghreb",
+              timeRemaining: nextPrayer['duration']),
           Divider(height: 22, color: Colors.black12),
-          _buildPrayerTimeRow("Isha", "19:19"),
+          _buildPrayerTimeRow("Isha", times.isha,
+              isNext: nextPrayer['name'] == "Isha",
+              timeRemaining: nextPrayer['duration']),
         ],
       ),
     );
   }
 
-  Widget _buildPrayerTimeRow(String name, String time) {
+  Widget _buildPrayerTimeRow(String name, String time,
+      {bool isNext = false, Duration? timeRemaining}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          name,
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.black87,
-          ),
+        Row(
+          children: [
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 16,
+                color: isNext ? AppColors.primaryColor : Colors.black87,
+                fontWeight: isNext ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+            if (isNext && timeRemaining != null) ...[
+              SizedBox(width: 8),
+              Text(
+                "(${timeRemaining.inHours.toString().padLeft(2, '0')}:${(timeRemaining.inMinutes % 60).toString().padLeft(2, '0')}:${(timeRemaining.inSeconds % 60).toString().padLeft(2, '0')})",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: AppColors.greyColor,
+                ),
+              ),
+            ]
+          ],
         ),
         Text(
           time,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.black87,
+            color: isNext ? AppColors.primaryColor : Colors.black87,
+            fontWeight: isNext ? FontWeight.bold : FontWeight.normal,
           ),
         ),
       ],
