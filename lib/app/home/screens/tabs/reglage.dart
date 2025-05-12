@@ -1,3 +1,4 @@
+// lib/app/home/screens/tabs/reglage.dart
 import '/constants/assets_path.dart';
 import '/constants/app_export.dart';
 
@@ -37,10 +38,7 @@ class ReglageTab extends StatelessWidget {
                     ),
                     onTap: () => MyNavigation.goToPremium(),
                   ),
-                  Divider(
-                      height: 1,
-                      thickness: 1,
-                      color: Colors.grey.withValues(alpha: 0.2)),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.brightRedColor,
                     title: "Notifications",
@@ -50,6 +48,22 @@ class ReglageTab extends StatelessWidget {
                       height: 24,
                     ),
                     onTap: () => MyNavigation.goToNotification(),
+                  ),
+                ]),
+
+                SizedBox(height: 26),
+
+                // Nouveau bloc pour les Favoris
+                _buildSettingBlock([
+                  _buildSettingItem(
+                    iconColor: AppColors.secondaryColor,
+                    title: "Mes favoris",
+                    icon: Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                    onTap: () => MyNavigation.goToFavorites(),
                   ),
                 ]),
 
@@ -83,10 +97,7 @@ class ReglageTab extends StatelessWidget {
                     ),
                     onTap: () => MyNavigation.goToCouleur(),
                   ),
-                  Divider(
-                      height: 1,
-                      thickness: 1,
-                      color: Colors.grey.withValues(alpha: 0.2)),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.skyBlueColor,
                     title: "Langues",
@@ -112,10 +123,7 @@ class ReglageTab extends StatelessWidget {
                       height: 24,
                     ),
                   ),
-                  Divider(
-                      height: 1,
-                      thickness: 1,
-                      color: Colors.grey.withValues(alpha: 0.2)),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.skyBlueColor,
                     title: "Suivez-nous",
@@ -154,11 +162,7 @@ class ReglageTab extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingItem(
-      {required Widget icon,
-      required String title,
-      required Color iconColor,
-      VoidCallback? onTap}) {
+  Widget _buildSettingItem({required Widget icon, required String title, required Color iconColor, VoidCallback? onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(

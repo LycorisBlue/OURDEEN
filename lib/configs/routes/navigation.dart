@@ -64,6 +64,10 @@ class MyNavigation {
     Get.toNamed(MyRoutes.language);
   }
 
+  static void goToFavorites() {
+    Get.toNamed(MyRoutes.favorites);
+  }
+
   static void goTo404Page() {
     Get.offAllNamed(MyRoutes.unknownRoute);
   }

@@ -34,6 +34,12 @@ class AppIcon {
   static const iconStar = 'assets/icons/ant-design_star-filled.svg';
   static const iconStarFilled = 'assets/icons/ant-design_star-filled-1.svg';
   static const iconLink = 'assets/icons/akar-icons_link-chain.svg';
+
+  // images pour les étapes de les favoris
+  static const iconMuslim = 'assets/icons/arcticons_muslim-pro.svg';
+  static const iconAlarmeFajr = 'assets/icons/Alarme-Fajr.svg';
+  static const iconVector = 'assets/icons/Vector.svg';
+  static const iconBook_1 = 'assets/icons/bi_book.svg';
 }
 
 class AppImage {
@@ -52,4 +58,6 @@ class AppImage {
   static const prayerAsr = "assets/images/prayer/asr.png";
   static const prayerMaghreb = "assets/images/prayer/maghreb.png";
   static const prayerIsha = "assets/images/prayer/isha.png";
+
+
 }

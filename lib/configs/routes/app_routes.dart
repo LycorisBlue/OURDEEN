@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:our_deen/app/home/screens/favorites_screen.dart';
 import '/app/account/screens/couleur_screen.dart';
 import '/app/account/screens/genre_screen.dart';
 import '/app/account/screens/language_screen.dart';
@@ -35,6 +36,8 @@ class AppPages {
   static const couleur = MyRoutes.couleur;
   static const language = MyRoutes.language;
   static const tasbih = MyRoutes.tasbih;
+  static const favorites = MyRoutes.favorites;
+
 
   static const unknownRoute = MyRoutes.unknownRoute;
 
@@ -128,6 +131,11 @@ class AppPages {
       page: () => LanguageScreen(),
       title: PageTitle.languagePage,
       binding: AccountBinding(),
+    ),
+    GetPage(
+      name: favorites,
+      page: () => FavoritesScreen(),
+      title: PageTitle.favoritesPage,
     ),
   ];
 }

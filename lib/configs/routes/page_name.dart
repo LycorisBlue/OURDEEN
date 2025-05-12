@@ -14,6 +14,7 @@ class MyRoutes {
   static const genre = '/genre';
   static const couleur = '/couleur';
   static const language = '/language';
+  static const favorites = '/favorites';
 
 
   static const unknownRoute = "/unknownRoute";
@@ -35,4 +36,6 @@ class PageTitle {
   static var genrePage = 'genre';
   static var couleurPage = 'couleur';
   static var languagePage = 'language';
+  static var favoritesPage = 'favorites';
+
 }
