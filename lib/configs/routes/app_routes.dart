@@ -1,4 +1,8 @@
 import 'package:get/get.dart';
+import 'package:our_deen/app/account/screens/privacy_policy_screen.dart';
+import 'package:our_deen/app/account/screens/profile_screen.dart';
+import 'package:our_deen/app/account/screens/register_screen.dart';
+import 'package:our_deen/app/account/screens/terms_of_service_screen.dart';
 import 'package:our_deen/app/home/screens/favorites_screen.dart';
 import '/app/account/screens/couleur_screen.dart';
 import '/app/account/screens/genre_screen.dart';
@@ -38,7 +42,6 @@ class AppPages {
   static const tasbih = MyRoutes.tasbih;
   static const favorites = MyRoutes.favorites;
 
-
   static const unknownRoute = MyRoutes.unknownRoute;
 
   static final routes = [
@@ -52,6 +55,18 @@ class AppPages {
       name: login,
       page: () => const LoginPage(),
       title: PageTitle.loginPage,
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: MyRoutes.register,
+      page: () => const RegisterPage(),
+      title: PageTitle.registerPage,
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: MyRoutes.profile,
+      page: () => ProfileScreen(),
+      title: PageTitle.profilePage,
       binding: AccountBinding(),
     ),
     GetPage(
@@ -136,6 +151,18 @@ class AppPages {
       name: favorites,
       page: () => FavoritesScreen(),
       title: PageTitle.favoritesPage,
+    ),
+    GetPage(
+      name: MyRoutes.privacyPolicy,
+      page: () => PrivacyPolicyScreen(),
+      title: PageTitle.privacyPolicyPage,
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: MyRoutes.termsOfService,
+      page: () => TermsOfServiceScreen(),
+      title: PageTitle.termsOfServicePage,
+      binding: AccountBinding(),
     ),
   ];
 }

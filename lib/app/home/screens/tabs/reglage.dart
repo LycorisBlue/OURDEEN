@@ -28,6 +28,17 @@ class ReglageTab extends StatelessWidget {
 
                 // Premier bloc: Premium et Notifications
                 _buildSettingBlock([
+                                    _buildSettingItem(
+                    iconColor: AppColors.primaryColor,
+                    title: "Profil",
+                    icon: CustomImageView(
+                      svgPath: AppIcon.iconProfile,
+                      width: 24,
+                      height: 24,
+                    ),
+                    onTap: () => MyNavigation.goToProfile(),
+                  ),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.goldColor,
                     title: "Obtenez le premium",

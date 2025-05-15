@@ -1,6 +1,8 @@
 class MyRoutes {
   static const initial = '/initial';
   static const login = '/login';
+  static const register = '/register';
+  static const profile = '/profile';
   static const quibla = '/quibla';
   static const coranDetail = '/coranDetail';
   static const priereDetail = '/priereDetail';
@@ -15,7 +17,8 @@ class MyRoutes {
   static const couleur = '/couleur';
   static const language = '/language';
   static const favorites = '/favorites';
-
+  static const privacyPolicy = '/privacy-policy';
+  static const termsOfService = '/terms-of-service';
 
   static const unknownRoute = "/unknownRoute";
 }
@@ -23,6 +26,8 @@ class MyRoutes {
 class PageTitle {
   static var initial = 'initial';
   static var loginPage = 'login';
+  static var registerPage = 'register';
+  static var profilePage = 'profile';
   static var quiblaPage = 'quibla';
   static var coranDetailPage = 'coranDetail';
   static var priereDetailPage = 'priereDetail';
@@ -37,5 +42,7 @@ class PageTitle {
   static var couleurPage = 'couleur';
   static var languagePage = 'language';
   static var favoritesPage = 'favorites';
+  static var privacyPolicyPage = 'privacy-policy';
+  static var termsOfServicePage = 'terms-of-service';
 
 }

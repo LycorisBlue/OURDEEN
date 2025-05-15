@@ -11,6 +11,14 @@ class MyNavigation {
     Get.offAllNamed(MyRoutes.login);
   }
 
+  static void goToRegister() {
+    Get.toNamed(MyRoutes.register);
+  }
+
+  static void goToProfile() {
+    Get.toNamed(MyRoutes.profile);
+  }
+
   static void goToQuibla() {
     Get.toNamed(MyRoutes.quibla);
   }
@@ -66,6 +74,14 @@ class MyNavigation {
 
   static void goToFavorites() {
     Get.toNamed(MyRoutes.favorites);
+  }
+
+  static void goToPrivacyPolicy() {
+    Get.toNamed(MyRoutes.privacyPolicy);
+  }
+
+  static void goToTermsOfService() {
+    Get.toNamed(MyRoutes.termsOfService);
   }
 
   static void goTo404Page() {

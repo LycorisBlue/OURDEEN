@@ -79,7 +79,7 @@ class HomeTab extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Text(
-                "Bienvenue X !",
+                "Bienvenue Abou Bakar !",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
