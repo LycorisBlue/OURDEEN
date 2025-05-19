@@ -1,12 +1,17 @@
 import 'package:get/get.dart';
-import 'package:our_deen/app/account/screens/privacy_policy_screen.dart';
-import 'package:our_deen/app/account/screens/profile_screen.dart';
-import 'package:our_deen/app/account/screens/register_screen.dart';
-import 'package:our_deen/app/account/screens/terms_of_service_screen.dart';
-import 'package:our_deen/app/home/screens/favorites_screen.dart';
+import '/app/language/bindings/language_binding.dart';
+import '/app/account/screens/privacy_policy_screen.dart';
+import '/app/account/screens/profile_screen.dart';
+import '/app/account/screens/register_screen.dart';
+import '/app/account/screens/terms_of_service_screen.dart';
+import '/app/home/screens/favorites_screen.dart';
+import 'package:our_deen/app/home/screens/prophete_detail_screen.dart';
+import 'package:our_deen/app/home/screens/prophetes_list_screen.dart';
+import 'package:our_deen/app/home/screens/tafsir_list_screen.dart';
+import 'package:our_deen/app/home/screens/tafsir_screen.dart';
 import '/app/account/screens/couleur_screen.dart';
 import '/app/account/screens/genre_screen.dart';
-import '/app/account/screens/language_screen.dart';
+import '../../app/language/screens/language_screen.dart';
 import '/app/account/screens/notification_screen.dart';
 import '/app/account/screens/premium_screen.dart';
 import '/app/home/screens/duas.dart';
@@ -145,7 +150,7 @@ class AppPages {
       name: language,
       page: () => LanguageScreen(),
       title: PageTitle.languagePage,
-      binding: AccountBinding(),
+      binding: LanguageBinding(),
     ),
     GetPage(
       name: favorites,
@@ -163,6 +168,32 @@ class AppPages {
       page: () => TermsOfServiceScreen(),
       title: PageTitle.termsOfServicePage,
       binding: AccountBinding(),
+    ),
+
+GetPage(
+      name: MyRoutes.tafsirList,
+      page: () => TafsirListScreen(),
+      title: PageTitle.tafsirListPage,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: MyRoutes.tafsir,
+      page: () => const TafsirScreen(),
+      title: PageTitle.tafsirPage,
+      binding: HomeBinding(),
+    ),
+
+    GetPage(
+      name: MyRoutes.prophetesList,
+      page: () => ProphetesListScreen(),
+      title: PageTitle.prophetesListPage,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: MyRoutes.propheteDetail,
+      page: () => const PropheteDetailScreen(),
+      title: PageTitle.propheteDetailPage,
+      binding: HomeBinding(),
     ),
   ];
 }

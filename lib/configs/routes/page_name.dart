@@ -19,6 +19,10 @@ class MyRoutes {
   static const favorites = '/favorites';
   static const privacyPolicy = '/privacy-policy';
   static const termsOfService = '/terms-of-service';
+  static const tafsirList = '/tafsirList';
+  static const tafsir = '/tafsir';
+  static const prophetesList = '/prophetesList';
+  static const propheteDetail = '/propheteDetail';
 
   static const unknownRoute = "/unknownRoute";
 }
@@ -44,5 +48,11 @@ class PageTitle {
   static var favoritesPage = 'favorites';
   static var privacyPolicyPage = 'privacy-policy';
   static var termsOfServicePage = 'terms-of-service';
+  static var tafsirListPage = 'tafsirList';
+  static var tafsirPage = 'tafsir';
+  static var prophetesListPage = 'prophetesList';
+  static var propheteDetailPage = 'propheteDetail';
+
+
 
 }

@@ -65,7 +65,6 @@ class FavoritesScreen extends StatelessWidget {
             ),
 
             // Favorite tools grid
-            // Favorite tools grid
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: GridView.count(

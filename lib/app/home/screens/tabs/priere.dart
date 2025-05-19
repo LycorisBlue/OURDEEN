@@ -55,7 +55,7 @@ class PriereTab extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Temps de prière",
+            "Prayer Times".tr,
             style: TextStyle(
               color: Colors.white,
               fontSize: 26.sp,
@@ -138,7 +138,7 @@ class PriereTab extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "LA PROCHAINE PRIÈRE EST",
+                  "NEXT PRAYER IS".tr,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -191,7 +191,7 @@ class PriereTab extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
       child: Center(
         child: Text(
-          "Il est actuellement ${now.hour.toString().padLeft(2, '0')}h${now.minute.toString().padLeft(2, '0')}",
+          "${"It is currently".tr} ${now.hour.toString().padLeft(2, '0')}h${now.minute.toString().padLeft(2, '0')}",
           style: TextStyle(
             color: Colors.white,
             fontSize: 16,
@@ -221,7 +221,7 @@ class PriereTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Heures de prières d'aujourd'hui",
+            "Today's prayer times".tr,
             style: TextStyle(
               fontSize: 22.sp,
               fontWeight: FontWeight.bold,
@@ -261,7 +261,7 @@ class PriereTab extends StatelessWidget {
         Row(
           children: [
             Text(
-              name,
+              name.tr,
               style: TextStyle(
                 fontSize: 16,
                 color: isNext ? AppColors.primaryColor : Colors.black87,

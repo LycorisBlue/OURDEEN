@@ -1,4 +1,4 @@
-enum Langue { fr, en, unselect }
+enum Langue { fr, en, ar, unselect }
 
 enum EnvironmentType { dev, prod, local }
 

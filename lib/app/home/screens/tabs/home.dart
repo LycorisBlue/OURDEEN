@@ -1,6 +1,4 @@
-import 'package:hijri/hijri_calendar.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '/shared_components/layout/bottom_navigation/bn_contolleur.dart';
 import '../../widgets/community_card.dart';
 import '../../widgets/divine_names_card.dart';
@@ -48,7 +46,9 @@ class HomeTab extends StatelessWidget {
                       width: 50,
                       height: 20,
                     ))
-                : _buildPrayerTimesGrid()),
+                : controller.prayerTimes.value == null
+                    ? SizedBox()
+                    : _buildPrayerTimesGrid()),
             _buildCategorySection(),
             _buildDivineNamesSection(),
             _buildCommunitySection(),
@@ -79,7 +79,7 @@ class HomeTab extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Text(
-                "Bienvenue Abou Bakar !",
+                "${"Welcome".tr} Abou Bakar !",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ class HomeTab extends StatelessWidget {
                     height: 20,
                   ))
               : Text(
-                  "Prochaine prière ${controller.remainingTime}",
+                  "${"Next Prayer".tr} ${controller.remainingTime}",
                   style: TextStyle(
                     fontSize: 16.sp,
                     color: AppColors.blackColor,
@@ -258,7 +258,7 @@ class HomeTab extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            name,
+            name.tr,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -279,79 +279,177 @@ class HomeTab extends StatelessWidget {
   }
 }
 
+
 Widget _buildCategorySection() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 22, vertical: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Vos rubriques",
-              style: TextStyle(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                // Action pour "Tout voir"
-              },
-              child: Text(
-                "Tout voir",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.primaryColor,
+
+  // État pour suivre si nous affichons en mode grille ou ligne
+  final RxBool showAsGrid = false.obs;
+
+  // Définir les éléments de catégorie une seule fois
+  final List<Map<String, dynamic>> categories = [
+    {
+      'title': 'Qibla',
+      'color': AppColors.primaryColor,
+      'icon': Icons.explore,
+      'onTap': () => Get.find<BNavigationController>().changeTabIndex(2),
+      'customIcon': null
+    },
+    {
+      'title': 'Prières',
+      'color': AppColors.primaryDarkColor,
+      'icon': Icons.timer,
+      'onTap': () => MyNavigation.goToListStepSalat(),
+      'customIcon': CustomImageView(
+        svgPath: AppIcon.iconPriere,
+        color: null, // Sera défini dynamiquement
+        margin: EdgeInsets.all(12),
+      )
+    },
+    {
+      'title': 'Duas',
+      'color': AppColors.secondaryColor,
+      'icon': Icons.volunteer_activism,
+      'onTap': () => MyNavigation.goToDuas(),
+      'customIcon': null
+    },
+    {
+      'title': 'Tafsir',
+      'color': AppColors.brightRedColor,
+      'icon': Icons.menu_book_outlined,
+      'onTap': () => MyNavigation.goToTafsirList(),
+      'customIcon': null
+    },
+    {
+      'title': 'Prophètes',
+      'color': AppColors.navyBlueColor,
+      'icon': Icons.history_edu,
+      'onTap': () => MyNavigation.goToProphetesList(),
+      'customIcon': null
+    },
+    {
+      'title': 'Tasbih',
+      'color': AppColors.primaryDarkColor,
+      'icon': Icons.grain,
+      'onTap': () => MyNavigation.goToTasbih(),
+      'customIcon': null
+    },
+    {
+      'title': 'Zakat',
+      'color': AppColors.primaryLightColor,
+      'icon': Icons.calculate,
+      'onTap': () => MyNavigation.goToZakkat(),
+      'customIcon': null
+    },
+  ];
+
+  return Obx(() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Your sections".tr,
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                GestureDetector(
+                  onTap: () {
+                    // Basculer entre l'affichage en grille et en ligne
+                    showAsGrid.value = !showAsGrid.value;
+                  },
+                  child: Text(
+                    showAsGrid.value ? "Voir moins" : "See more".tr,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+
+          // Affichage en fonction du mode sélectionné
+          if (!showAsGrid.value)
+            // Affichage en ligne (horizontale)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: categories.map((category) {
+                  // Gérer la couleur de l'icône personnalisée
+                  Widget? customIcon = category['customIcon'];
+                  if (customIcon != null && customIcon is CustomImageView) {
+                    customIcon = CustomImageView(
+                      svgPath: customIcon.svgPath,
+                      color: category['color'],
+                      margin: customIcon.margin,
+                      width: customIcon.width,
+                      height: customIcon.height,
+                    );
+                  }
+
+                  return _buildCategoryItem(
+                    category['title'],
+                    category['color'],
+                    category['icon'],
+                    onTap: category['onTap'],
+                    customIcon: customIcon,
+                  );
+                }).toList(),
+              ),
+            )
+          else
+            // Affichage en grille
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 0.85,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 16,
+                ),
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  final category = categories[index];
+
+                  // Gérer la couleur de l'icône personnalisée
+                  Widget? customIcon = category['customIcon'];
+                  if (customIcon != null && customIcon is CustomImageView) {
+                    customIcon = CustomImageView(
+                      svgPath: customIcon.svgPath,
+                      color: category['color'],
+                      margin: customIcon.margin,
+                      width: customIcon.width,
+                      height: customIcon.height,
+                    );
+                  }
+
+                  return _buildCategoryItem(
+                    category['title'],
+                    category['color'],
+                    category['icon'],
+                    onTap: category['onTap'],
+                    customIcon: customIcon,
+                  );
+                },
               ),
             ),
-          ],
-        ),
-      ),
-      SizedBox(height: 10),
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: [
-            _buildCategoryItem(
-              "Qibla",
-              AppColors.primaryColor,
-              Icons.explore,
-              onTap: () {
-                Get.find<BNavigationController>().changeTabIndex(2);
-              },
-            ),
-            _buildCategoryItem(
-                "Prières", AppColors.primaryDarkColor, Icons.timer,
-                customIcon: CustomImageView(
-                  svgPath: AppIcon.iconPriere,
-                  color: AppColors.primaryDarkColor,
-                  margin: EdgeInsets.all(12),
-                ), onTap: () {
-              MyNavigation.goToListStepSalat();
-            }),
-            _buildCategoryItem(
-                "Duas", AppColors.secondaryColor, Icons.volunteer_activism,
-                onTap: () => MyNavigation.goToDuas()),
-            _buildCategoryItem(
-                "Tasbih", AppColors.primaryDarkColor, Icons.grain,
-                onTap: () => MyNavigation.goToTasbih()),
-            _buildCategoryItem(
-                "Zakat", AppColors.primaryLightColor, Icons.calculate,
-                onTap: () => MyNavigation.goToZakkat()),
-          ],
-        ),
-      ),
-    ],
-  );
+        ],
+      ));
 }
 
-Widget _buildCategoryItem(String title, Color color, IconData icon,
-    {VoidCallback? onTap, Widget? customIcon}) {
+Widget _buildCategoryItem(String title, Color color, IconData icon, {VoidCallback? onTap, Widget? customIcon}) {
   return GestureDetector(
     onTap: onTap,
     child: SizedBox(
@@ -375,7 +473,7 @@ Widget _buildCategoryItem(String title, Color color, IconData icon,
           ),
           SizedBox(height: 8),
           Text(
-            title,
+            title.tr,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14.sp,
@@ -388,6 +486,7 @@ Widget _buildCategoryItem(String title, Color color, IconData icon,
   );
 }
 
+
 Widget _buildDivineNamesSection() {
   return DivineNamesCard(
     arabicName: "الغفار",
@@ -396,9 +495,12 @@ Widget _buildDivineNamesSection() {
     onTap: () {
       MyNavigation.goToName99();
     },
-    onShowDetails: () {},
+    onShowDetails: () {
+      MyNavigation.goToName99();
+    },
     onShare: () {
-      // Action pour le bouton PARTAGER
+      Utils.partager(
+          "Les 99 nom d'Allah : je partage avec vous le nom de Al-Ghaffār - L'Infini Pardonneur");
     },
     onMore: () {
       // Action pour le bouton More (trois points)
@@ -409,9 +511,7 @@ Widget _buildDivineNamesSection() {
 Widget _buildCommunitySection() {
   return CommunityCard(
     onJoinFacebook: () {
-      // Action pour le bouton "REJOINDRE SUR FACEBOOK"
-      // Vous pouvez ajouter ici un lien vers Facebook ou une autre action
-      // Par exemple: Get.to(() => WebViewScreen(url: 'https://www.facebook.com/group/...'));
+      Utils.launchURL('https://web.facebook.com/OurDeenofficiel');
     },
     onMoreOptions: () {
       // Action pour le bouton More (trois points)

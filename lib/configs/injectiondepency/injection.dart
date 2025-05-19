@@ -15,10 +15,9 @@ Future<void> init() async {
     () => AuthRepositoryImpl(),
   );
 
-   sl.registerLazySingleton<CoranRepository>(
+  sl.registerLazySingleton<CoranRepository>(
     () => CoranRepositoryImpl(),
   );
-
 
   //... add other more repository here ....
 
@@ -36,8 +35,9 @@ Future<void> init() async {
 
   // language init
   if (sl<LocalStorageServices>().getUserSelectedLang != null) {
-    Utils.changeLangue(Utils.convertLagueToEnum(
-        sl<LocalStorageServices>().getUserSelectedLang!));
+    Utils.changeLangue(
+      Utils.convertLagueToEnum(sl<LocalStorageServices>().getUserSelectedLang!),
+    );
   }
 
 /*

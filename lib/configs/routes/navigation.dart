@@ -84,7 +84,23 @@ class MyNavigation {
     Get.toNamed(MyRoutes.termsOfService);
   }
 
+  static void goToTafsirList() {
+    Get.toNamed(MyRoutes.tafsirList);
+  }
+
+  static void goToTafsir(Sourate sourate) {
+    Get.toNamed(MyRoutes.tafsir, arguments: sourate);
+  }
+
   static void goTo404Page() {
     Get.offAllNamed(MyRoutes.unknownRoute);
+  }
+
+  static void goToProphetesList() {
+    Get.toNamed(MyRoutes.prophetesList);
+  }
+
+  static void goToPropheteDetail(Map<String, dynamic> prophete) {
+    Get.toNamed(MyRoutes.propheteDetail, arguments: prophete);
   }
 }

@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '/data/locals/data_local.dart';
 import '/configs/injectiondepency/injection.dart';
 import '/services/locals/local_storage_service.dart';
@@ -21,6 +24,11 @@ class Utils {
       case Langue.en:
         {
           return const Locale('en', 'US');
+        }
+
+      case Langue.ar:
+        {
+          return const Locale('ar', 'SA');
         }
 
       default:
@@ -111,15 +119,30 @@ class Utils {
   }
 
   static String getFrenchName(String englishTranslation) {
-  
     return sourateTraductionsFr[englishTranslation] ?? englishTranslation;
   }
 
-  static String addTimeToString(String timeStr, {int hoursToAdd = 0, int minutesToAdd = 0}) {
-  DateTime time = DateTime.parse("2000-01-01T$timeStr:00");
-  DateTime newTime = time.add(Duration(hours: hoursToAdd, minutes: minutesToAdd));
-  String formatted = "${newTime.hour.toString().padLeft(2, '0')}:${newTime.minute.toString().padLeft(2, '0')}";
-  
-  return formatted;
-}
+  static String addTimeToString(String timeStr,
+      {int hoursToAdd = 0, int minutesToAdd = 0}) {
+    DateTime time = DateTime.parse("2000-01-01T$timeStr:00");
+    DateTime newTime =
+        time.add(Duration(hours: hoursToAdd, minutes: minutesToAdd));
+    String formatted =
+        "${newTime.hour.toString().padLeft(2, '0')}:${newTime.minute.toString().padLeft(2, '0')}";
+
+    return formatted;
+  }
+
+  static Future<void> launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Impossible de lancer $url';
+    }
+  }
+
+  static partager(String data) {
+    Share.share(data, subject: 'Ourdeen');
+  }
 }

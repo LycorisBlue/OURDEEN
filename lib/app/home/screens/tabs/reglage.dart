@@ -17,7 +17,7 @@ class ReglageTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Réglages",
+                  "Settings".tr,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
@@ -28,9 +28,9 @@ class ReglageTab extends StatelessWidget {
 
                 // Premier bloc: Premium et Notifications
                 _buildSettingBlock([
-                                    _buildSettingItem(
+                  _buildSettingItem(
                     iconColor: AppColors.primaryColor,
-                    title: "Profil",
+                    title: "Profile".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconProfile,
                       width: 24,
@@ -41,7 +41,7 @@ class ReglageTab extends StatelessWidget {
                   Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.goldColor,
-                    title: "Obtenez le premium",
+                    title: "Get the premium".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconStarFilled,
                       width: 24,
@@ -52,7 +52,7 @@ class ReglageTab extends StatelessWidget {
                   Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.brightRedColor,
-                    title: "Notifications",
+                    title: "Notifications".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconBell,
                       width: 24,
@@ -68,7 +68,7 @@ class ReglageTab extends StatelessWidget {
                 _buildSettingBlock([
                   _buildSettingItem(
                     iconColor: AppColors.secondaryColor,
-                    title: "Mes favoris",
+                    title: "My favorites".tr,
                     icon: Icon(
                       Icons.favorite,
                       color: Colors.white,
@@ -84,7 +84,7 @@ class ReglageTab extends StatelessWidget {
                 _buildSettingBlock([
                   _buildSettingItem(
                     iconColor: AppColors.purpleColor,
-                    title: "Genre",
+                    title: "Type".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconProfile,
                       width: 24,
@@ -100,7 +100,7 @@ class ReglageTab extends StatelessWidget {
                 _buildSettingBlock([
                   _buildSettingItem(
                     iconColor: AppColors.brightRedColor,
-                    title: "Couleurs",
+                    title: "Colors".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconBrush,
                       width: 24,
@@ -111,7 +111,7 @@ class ReglageTab extends StatelessWidget {
                   Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.skyBlueColor,
-                    title: "Langues",
+                    title: "Languages".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconLanguage,
                       width: 24,
@@ -127,7 +127,7 @@ class ReglageTab extends StatelessWidget {
                 _buildSettingBlock([
                   _buildSettingItem(
                     iconColor: AppColors.brightRedColor,
-                    title: "Évaluez-nous",
+                    title: "Rate us".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconStar,
                       width: 24,
@@ -137,11 +137,63 @@ class ReglageTab extends StatelessWidget {
                   Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
                   _buildSettingItem(
                     iconColor: AppColors.skyBlueColor,
-                    title: "Suivez-nous",
+                    title: "Follow us".tr,
                     icon: CustomImageView(
                       svgPath: AppIcon.iconLink,
                       width: 24,
                       height: 24,
+                    ),
+                  ),
+                ]),
+
+                SizedBox(height: 26),
+
+                // Nouveau bloc: Juridique
+                _buildSettingBlock([
+                  _buildSettingItem(
+                    iconColor: AppColors.navyBlueColor,
+                    title: "Politique de confidentialité",
+                    icon: Icon(
+                      Icons.privacy_tip_outlined,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                    onTap: () => MyNavigation.goToPrivacyPolicy(),
+                  ),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
+                  _buildSettingItem(
+                    iconColor: AppColors.purpleColor,
+                    title: "Conditions d'utilisation",
+                    icon: Icon(
+                      Icons.gavel_outlined,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                    onTap: () => MyNavigation.goToTermsOfService(),
+                  ),
+                ]),
+
+                SizedBox(height: 26),
+
+                // Bloc À propos
+                _buildSettingBlock([
+                  _buildSettingItem(
+                    iconColor: AppColors.primaryColor,
+                    title: "À propos de Ourdeen",
+                    icon: Icon(
+                      Icons.info_outline,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                  Divider(height: 1, thickness: 1, color: Colors.grey.withValues(alpha: 0.2)),
+                  _buildSettingItem(
+                    iconColor: AppColors.secondaryColor,
+                    title: "Aide et support",
+                    icon: Icon(
+                      Icons.help_outline,
+                      color: Colors.white,
+                      size: 24,
                     ),
                   ),
                 ]),

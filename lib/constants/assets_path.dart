@@ -59,5 +59,16 @@ class AppImage {
   static const prayerMaghreb = "assets/images/prayer/maghreb.png";
   static const prayerIsha = "assets/images/prayer/isha.png";
 
+  static const pictureTafsir = "assets/images/Tafsir-banner.png";
+  static const pictureProphetBanner = "assets/images/prophete_banner.png";
 
+
+
+}
+
+
+class AppFlag{
+  static const String fr = "assets/flags/fr.svg";
+  static const String sa = "assets/flags/sa.svg";
+  static const String um = "assets/flags/um.svg";
 }

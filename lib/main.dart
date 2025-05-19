@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: const [
               Locale('fr', 'FR'),
               Locale('en', 'US'),
+              Locale('ar', 'SA'),
             ],
             locale: Get.locale ?? const Locale('fr', 'FR'),
             fallbackLocale: const Locale('fr', 'FR'),
@@ -44,9 +45,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             //-----------------------------------------
-            //-------------
-            //
-            //
+
             //--getx routing--------------
             getPages: AppPages.routes,
             initialRoute: MyRoutes.initial,

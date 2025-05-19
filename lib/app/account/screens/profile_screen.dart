@@ -23,18 +23,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String userPhone = "+225 01 23 45 67 89";
     String userGender = "Masculin"; // Ou "Féminin" selon la valeur de genre
 
-    // Si vous utilisez les vraies données du contrôleur, vous pouvez les récupérer comme ceci:
-    // if (controller.name.value.isNotEmpty) {
-    //   userName = controller.name.value;
-    //   final nameParts = controller.name.value.split(' ');
-    //   userInitials = nameParts.length > 1
-    //       ? '${nameParts[0][0]}${nameParts[1][0]}'
-    //       : nameParts[0].substring(0, min(nameParts[0].length, 2));
-    // }
-    // userEmail = controller.email.value;
-    // userPhone = controller.phone.value;
-    // userGender = controller.genre.value == 'M' ? 'Masculin' : 'Féminin';
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -205,148 +193,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
 
-                // Titres des sections
+                // Actions du profil (modification des informations seulement)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Paramètres du compte",
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.blackColor,
-                        fontFamily: AppFont.poppins,
-                      ),
+                  padding: const EdgeInsets.all(16),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: AppRadiusStyle.roundedBorder16,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
+                          ),
+                          title: Text(
+                            "Modifier mes informations",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: AppFont.poppins,
+                            ),
+                          ),
+                          trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                          onTap: () {
+                            // Action pour modifier le profil
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
-
-                // Paramètres du compte (modifiés)
-                _buildProfileMenuSection([
-                  _buildProfileMenuItem(
-                    "Mettre à jour mes informations",
-                    Icons.edit_outlined,
-                    AppColors.navyBlueColor,
-                    onTap: () {
-                      // Navigation vers l'édition du profil
-                    },
-                  ),
-                  _buildProfileMenuItem(
-                    "Notifications",
-                    Icons.notifications_none,
-                    AppColors.goldColor,
-                    onTap: () {
-                      MyNavigation.goToNotification();
-                    },
-                  ),
-                  _buildProfileMenuItem(
-                    "Langue",
-                    Icons.language,
-                    AppColors.brightRedColor,
-                    onTap: () {
-                      MyNavigation.goToLanguage();
-                    },
-                  ),
-                  _buildProfileMenuItem(
-                    "Apparence",
-                    Icons.color_lens_outlined,
-                    AppColors.skyBlueColor,
-                    onTap: () {
-                      MyNavigation.goToCouleur();
-                    },
-                  ),
-                ]),
-
-                // Titres des sections
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Contenu et préférences",
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.blackColor,
-                        fontFamily: AppFont.poppins,
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Contenu et préférences
-                _buildProfileMenuSection([
-                  _buildProfileMenuItem(
-                    "Favoris",
-                    Icons.favorite_border,
-                    AppColors.brightRedColor,
-                    onTap: () {
-                      MyNavigation.goToFavorites();
-                    },
-                  ),
-                ]),
-
-                // Titres des sections
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Autres",
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.blackColor,
-                        fontFamily: AppFont.poppins,
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Autres options
-                _buildProfileMenuSection([
-                  _buildProfileMenuItem(
-                    "Abonnement Premium",
-                    Icons.star_border,
-                    AppColors.goldColor,
-                    onTap: () {
-                      MyNavigation.goToPremium();
-                    },
-                  ),
-                  _buildProfileMenuItem(
-                    "Politique de confidentialité",
-                    Icons.privacy_tip_outlined,
-                    AppColors.navyBlueColor,
-                    onTap: () {
-                      MyNavigation.goToPrivacyPolicy();
-                    },
-                  ),
-                  _buildProfileMenuItem(
-                    "Conditions d'utilisation",
-                    Icons.gavel_outlined,
-                    AppColors.purpleColor,
-                    onTap: () {
-                      MyNavigation.goToTermsOfService();
-                    },
-                  ),
-                  _buildProfileMenuItem(
-                    "À propos de Ourdeen",
-                    Icons.info_outline,
-                    AppColors.skyBlueColor,
-                    onTap: () {
-                      // Navigation vers à propos
-                    },
-                  ),
-                  _buildProfileMenuItem(
-                    "Aide et support",
-                    Icons.help_outline,
-                    AppColors.primaryColor,
-                    onTap: () {
-                      // Navigation vers aide et support
-                    },
-                  ),
-                ]),
 
                 // Bouton de déconnexion
                 Padding(
@@ -533,79 +426,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  // Widget pour une section de menu
-  Widget _buildProfileMenuSection(List<Widget> items) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: AppRadiusStyle.roundedBorder16,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        children: items,
-      ),
-    );
-  }
-
-  // Widget pour un élément de menu
-  Widget _buildProfileMenuItem(String title, IconData icon, Color iconColor, {VoidCallback? onTap}) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.grey.withOpacity(0.1),
-              width: 1,
-            ),
-          ),
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: iconColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(
-                icon,
-                color: iconColor,
-                size: 20,
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.blackColor,
-                  fontFamily: AppFont.poppins,
-                ),
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: AppColors.greyColor,
-              size: 16,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
